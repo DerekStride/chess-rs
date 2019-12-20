@@ -1,6 +1,6 @@
-mod board;
+mod chess;
 
-use board::Board;
+use crate::chess::board::Board;
 
 fn main() {
     let game =  Board::new();

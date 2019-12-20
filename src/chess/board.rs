@@ -1,94 +1,11 @@
 use std::fmt;
 
+use crate::chess::piece::Piece;
+use crate::chess::player::Player;
+
 pub struct Board {
     grid: [[Option<Piece>; 8]; 8],
     turn: Player,
-}
-
-#[derive(Copy, Clone)]
-pub enum Player {
-    White,
-    Black,
-}
-
-impl fmt::Display for Player {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Player::White => write!(f, "White"),
-            Player::Black => write!(f, "Black"),
-        }
-    }
-}
-
-#[derive(Copy, Clone)]
-pub enum PieceType {
-    Pawn,
-    Knight,
-    Bishop,
-    Rook,
-    Queen,
-    King,
-}
-
-impl fmt::Display for PieceType {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            PieceType::Pawn => write!(f, "P"),
-            PieceType::Knight => write!(f, "N"),
-            PieceType::Bishop => write!(f, "B"),
-            PieceType::Rook => write!(f, "R"),
-            PieceType::Queen => write!(f, "Q"),
-            PieceType::King => write!(f, "K"),
-        }
-    }
-}
-
-#[derive(Copy, Clone)]
-pub struct Piece {
-    piece: PieceType,
-    player: Player,
-}
-
-impl Piece {
-    pub fn pawn(player: Player) -> Self {
-        Self::new(PieceType::Pawn, player)
-    }
-
-    pub fn knight(player: Player) -> Self {
-        Self::new(PieceType::Knight, player)
-    }
-
-    pub fn bishop(player: Player) -> Self {
-        Self::new(PieceType::Bishop, player)
-    }
-
-    pub fn rook(player: Player) -> Self {
-        Self::new(PieceType::Rook, player)
-    }
-
-    pub fn queen(player: Player) -> Self {
-        Self::new(PieceType::Queen, player)
-    }
-
-    pub fn king(player: Player) -> Self {
-        Self::new(PieceType::King, player)
-    }
-
-    pub fn new(piece: PieceType, player: Player) -> Self {
-        Self {
-            piece,
-            player,
-        }
-    }
-}
-
-impl fmt::Display for Piece {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self.player {
-            Player::White => write!(f, "w{}", self.piece),
-            Player::Black => write!(f, "b{}", self.piece),
-        }
-    }
 }
 
 impl Board {
