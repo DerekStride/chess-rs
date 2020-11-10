@@ -3,9 +3,9 @@ use std::fmt;
 use crate::chess::piece_rank::PieceRank;
 use crate::chess::player::Player;
 
-#[derive(Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Piece {
-    piece: PieceRank,
+    rank: PieceRank,
     player: Player,
 }
 
@@ -34,9 +34,9 @@ impl Piece {
         Self::new(PieceRank::King, player)
     }
 
-    pub fn new(piece: PieceRank, player: Player) -> Self {
+    fn new(rank: PieceRank, player: Player) -> Self {
         Self {
-            piece,
+            rank,
             player,
         }
     }
@@ -45,8 +45,23 @@ impl Piece {
 impl fmt::Display for Piece {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.player {
-            Player::White => write!(f, "w{}", self.piece),
-            Player::Black => write!(f, "b{}", self.piece),
+            Player::White => write!(f, "w{}", self.rank),
+            Player::Black => write!(f, "b{}", self.rank),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn pawn_returns_a_piece_with_type_pawn() {
+        let expected = Piece {
+            rank: PieceRank::Pawn,
+            player: Player::White,
+        };
+
+        assert_eq!(expected, Piece::pawn(Player::White));
     }
 }

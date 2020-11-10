@@ -41,11 +41,15 @@ impl Board {
             turn: Player::White,
         }
     }
+
+    // pub fn available_moves(&self) -> [Move] {
+
+    // }
 }
 
 impl fmt::Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let mut buffer = String::with_capacity(20);
+        let mut buffer = String::with_capacity(264);
 
         for (i, row) in self.grid.iter().enumerate() {
             buffer.push_str(&format!("{} |", 8 - i));
@@ -67,5 +71,28 @@ impl fmt::Display for Board {
         buffer.push_str(&format!("{} to move.", self.turn));
 
         write!(f, "{}", buffer)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_initializes_correctly() {
+        let mut buffer = String::with_capacity(264);
+        buffer.push_str("8 |bR|bN|bB|bQ|bK|bB|bN|bR|\n");
+        buffer.push_str("7 |bP|bP|bP|bP|bP|bP|bP|bP|\n");
+        buffer.push_str("6 |  |  |  |  |  |  |  |  |\n");
+        buffer.push_str("5 |  |  |  |  |  |  |  |  |\n");
+        buffer.push_str("4 |  |  |  |  |  |  |  |  |\n");
+        buffer.push_str("3 |  |  |  |  |  |  |  |  |\n");
+        buffer.push_str("2 |wP|wP|wP|wP|wP|wP|wP|wP|\n");
+        buffer.push_str("1 |wR|wN|wB|wQ|wK|wB|wN|wR|\n");
+        buffer.push_str("   a  b  c  d  e  f  g  h\n");
+        buffer.push_str("White to move.");
+
+        assert_eq!(buffer, format!("{}", Board::new()));
+        assert_eq!(buffer.len(), 264);
     }
 }

@@ -1,8 +1,8 @@
 mod chess;
 
-use crate::chess::board::Board;
+// use crate::chess::board::Board;
 
 fn main() {
-    let game =  Board::new();
-    println!("{}", game);
+    // let game =  Board::new();
+    // println!("{}", game);
 }
